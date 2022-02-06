@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
 @section('title')
-    Data Pekerjaan
+    Data Guru
 @endsection
 
 @section('header')
     <div class="row mb-2">
         <div class="col-sm-6">
-        <h1 class="m-0">Data Pekerjaan</h1>
+        <h1 class="m-0">Data Guru</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-            <li class="breadcrumb-item active">Daftar Pekerjaan</li>
+            <li class="breadcrumb-item active">Daftar Guru</li>
         </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -82,15 +82,15 @@
             <div class="card">
               <div class="card-header">
                 {{-- <h3 class="card-title">Daftar Unit</h3> --}}
-                    <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
+                    <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data Guru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
                     <div class="float-right">
-                        <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="btn btn-outline-info btn-sm  pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print"></i> CETAK</a>
+                        {{-- <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="btn btn-outline-info btn-sm  pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print"></i> CETAK</a> --}}
                         <a href="#" data-toggle="modal" data-target="#info" class="btn btn-outline-info btn-sm  pop-info" title="Informasi"><i class="fas fa-info"></i> INFO</a>
                     </div>
               </div>
               <div class="card-body">
                   @include('sistem.notifikasi')
-                  <section class="mb-3">
+                  {{-- <section class="mb-3">
                       <form action="{{ url($main['link']) }}" method="get">
                         <div class="row">
                             <div class="form-group col-md-2">
@@ -100,22 +100,21 @@
                             </div>
                         </div>
                     </form>
-                  </section>
+                  </section> --}}
                   <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead class="text-center">
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="10%">Aksi</th>
-                                <th>Nama Kegiatan</th>
-                                <th>Nama Paket Pekerjaan</th>
+                                <th>Poto</th>
+                                <th>Nama Lengkap</th>
                                 <th>Alamat</th>
-                                <th>Sumber Dana</th>
-                                <th>Tahun Anggaran</th>
+                                <th>Jenis Kelamin</th>
                             </tr>
                         </thead>
                         <tbody class="text-capitalize">
-                            @forelse ($pekerjaan as $item)
+                            @forelse ($guru as $item)
                             <tr>
                                     <td class="text-center">{{ $loop->iteration}}</td>
                                     <td class="text-center">
@@ -129,22 +128,21 @@
                                                   <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <button type="button" data-toggle="modal" data-kode_kegiatan="{{ $item->kode_kegiatan }}" data-kode_tender="{{ $item->kode_tender }}"  data-nama_kegiatan="{{ $item->nama_kegiatan }}"  data-sub_kegiatan="{{ $item->sub_kegiatan }}"  data-nama_paket="{{ $item->nama_paket }}"  data-kecamatan="{{ $item->kecamatan }}"  data-kode_belanja="{{ $item->kode_belanja }}" data-sumber_dana="{{ $item->sumber_dana }}" data-tahun_anggaran="{{ $item->tahun_anggaran }}" data-jenis_pekerjaan="{{ $item->jenis_pekerjaan }}" data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
+                                                    <button type="button" data-toggle="modal" data-nama="{{ $item->nama }}" data-jk="{{ $item->jk }}"  data-alamat="{{ $item->alamat }}"  data-gelar="{{ $item->gelar }}" data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                     </button>
                                                   <div class="dropdown-divider"></div>
                                                   <button onclick="deleteRow( {{ $item->id }} )" class="dropdown-item"><i class="fas fa-trash-alt text-danger"style="width: 25px"></i> HAPUS</button>
                                                 </div>
                                             </div>
                                     </td>
-                                    <td>{{ $item->nama_kegiatan}}</td>
-                                    <td>{{ $item->nama_paket}}</td>
-                                    <td>{{ $item->kecamatan}}</td>
-                                    <td>{{ $item->sumber_dana}}</td>
-                                    <td>{{ $item->tahun_anggaran}}</td>
+                                    <td>poto</td>
+                                    <td>{{ $item->nama.' '.$item->gelar}}</td>
+                                    <td>{{ $item->alamat}}</td>
+                                    <td>{{ $item->jk}}</td>
                                 </tr>
                             @empty
                                 <tr class="text-center">
-                                    <td colspan="7" class="font-italic">-- belum ada data --</td>
+                                    <td colspan="6" class="font-italic">-- belum ada data --</td>
                                 </tr>
                             @endforelse
                     </table>
@@ -161,7 +159,7 @@
             <form action="{{ url($main['link'])}}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Data Pekerjaan</h4>
+                <h4 class="modal-title">Tambah Data Guru</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -169,78 +167,37 @@
             <div class="modal-body p-3">
                 <section class="p-3">
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Kode Kegiatan {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Nama Guru {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="kode_kegiatan" id="kode_kegiatan" maxlength="16" value="{{ old('kode_kegiatan') }}" class="form-control" required>
+                            <input type="text" name="nama" id="nama" maxlength="16" value="{{ old('nama') }}" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Kode Tender {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Gelar</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="kode_tender" id="kode_tender" value="{{ old('kode_tender') }}" class="form-control" required>
+                            <input type="text" name="gelar" id="gelar" value="{{ old('gelar') }}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Nama Kegiatan {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Alamat {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="nama_kegiatan" id="nama_kegiatan" value="{{ old('nama_kegiatan') }}" class="form-control" required>
+                            <input type="text" name="alamat" id="alamat" value="{{ old('alamat') }}" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Sub Kegiatan {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Jenis Kelamin {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="sub_kegiatan" id="sub_kegiatan" value="{{ old('sub_kegiatan') }}" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Nama Paket {!! ireq() !!}</label>
-                        <div class="col-md-8 p-0">
-                            <input type="text" name="nama_paket" id="nama_paket" value="{{ old('nama_paket') }}" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Kecamatan {!! ireq() !!}</label>
-                        <div class="col-md-8 p-0">
-                            <select name="kecamatan" id="kecamatan" class="form-control" required>
-                                <option value="">-- pilih kecamatan --</option>
-                                @foreach ($kecamatan as $item)
-                                    <option value="{{ $item->nama }}">{{ strtoupper($item->nama) }}</option>
-                                @endforeach
+                            <select name="jk" id="jk" class="form-control" required>
+                                <option value="">-- pilih jenis kelamin --</option>
+                                    <option value="laki-laki">LAKI - LAKI</option>
+                                    <option value="perempuan">PEREMPUAN</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Kode Belanja {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Poto (opsional)</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="kode_belanja" id="kode_belanja" value="{{ old('kode_belanja') }}" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Sumber Dana {!! ireq() !!}</label>
-                        <div class="col-md-8 p-0">
-                            <select name="sumber_dana" id="sumber_dana" class="form-control" required>
-                                <option value="">-- pilih sumber dana --</option>
-                                @foreach ($sumberdana as $item)
-                                    <option value="{{ $item->nama }}">{{ strtoupper($item->keterangan) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Tahun Anggaran {!! ireq() !!}</label>
-                        <div class="col-md-8 p-0">
-                            <input type="text" name="tahun_anggaran" id="tahun_anggaran" value="{{ old('tahun_anggaran') }}" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Jenis Pekerjaan {!! ireq() !!}</label>
-                        <div class="col-md-8 p-0">
-                            <select name="jenis_pekerjaan" id="jenis_pekerjaan" class="form-control" required>
-                                <option value="">-- pilih jenis pekerjaan --</option>
-                                @foreach ($jenispekerjaan as $item)
-                                    <option value="{{ $item->nama }}">{{ strtoupper($item->nama) }}</option>
-                                @endforeach
-                            </select>
+                            <input type="file" name="poto" class="form-control">
                         </div>
                     </div>
                 </section>
@@ -272,39 +229,37 @@
                 <input type="hidden" name="id" id="id">
                 <section class="p-3">
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">NIP {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Nama Guru {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="nip" id="nip" maxlength="16" value="{{ old('nip') }}" class="form-control" required>
+                            <input type="text" name="nama" id="nama" maxlength="16" value="{{ old('nama') }}" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Nama {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Gelar</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="form-control" required>
+                            <input type="text" name="gelar" id="gelar" value="{{ old('gelar') }}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Jabatan {!! ireq() !!}</label>
+                        <label for="" class="col-md-4 p-2">Alamat {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan') }}" class="form-control" required>
+                            <input type="text" name="alamat" id="alamat" value="{{ old('alamat') }}" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">No SK</label>
+                        <label for="" class="col-md-4 p-2">Jenis Kelamin {!! ireq() !!}</label>
                         <div class="col-md-8 p-0">
-                            <input type="text" name="no_sk" id="no_sk" value="{{ old('no_sk') }}" class="form-control">
+                            <select name="jk" id="jk" class="form-control" required>
+                                <option value="">-- pilih jenis kelamin --</option>
+                                    <option value="laki-laki">LAKI - LAKI</option>
+                                    <option value="perempuan">PEREMPUAN</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Tanggal</label>
+                        <label for="" class="col-md-4 p-2">Poto (opsional)</label>
                         <div class="col-md-8 p-0">
-                            <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal') }}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-4 p-2">Perihal</label>
-                        <div class="col-md-8 p-0">
-                            <input type="text" name="perihal" id="perihal" value="{{ old('perihal') }}" class="form-control">
+                            <input type="file" name="poto" class="form-control">
                         </div>
                     </div>
                 </section>
@@ -348,21 +303,17 @@
             $('#ubah').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
                 var nama = button.data('nama')
-                var nip = button.data('nip')
-                var tanggal = button.data('tanggal')
-                var jabatan = button.data('jabatan')
-                var no_sk = button.data('no_sk')
-                var perihal = button.data('perihal')
+                var jk = button.data('jk')
+                var gelar = button.data('gelar')
+                var alamat = button.data('alamat')
                 var id = button.data('id')
         
                 var modal = $(this)
         
                 modal.find('.modal-body #nama').val(nama);
-                modal.find('.modal-body #nip').val(nip);
-                modal.find('.modal-body #tanggal').val(tanggal);
-                modal.find('.modal-body #jabatan').val(jabatan);
-                modal.find('.modal-body #no_sk').val(no_sk);
-                modal.find('.modal-body #perihal').val(perihal);
+                modal.find('.modal-body #jk').val(jk);
+                modal.find('.modal-body #gelar').val(gelar);
+                modal.find('.modal-body #alamat').val(alamat);
                 modal.find('.modal-body #id').val(id);
             })
         </script>

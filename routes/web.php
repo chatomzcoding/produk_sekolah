@@ -1,12 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\DatapokokController;
-use App\Http\Controllers\Admin\DokumenspkController;
-use App\Http\Controllers\Admin\InfowebsiteController;
-use App\Http\Controllers\Admin\KontrakController;
-use App\Http\Controllers\Admin\PekerjaanController;
-use App\Http\Controllers\Admin\PerusahaanController;
-use App\Http\Controllers\Admin\TimlokusController;
+use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Sistem\UserController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -30,6 +26,8 @@ Route::get('/', function ()
 */
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
+
+    Route::get('/migrasi', [HomeController::class, 'migrasi']);
     // Umum
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('dashboard');
 
@@ -37,12 +35,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::middleware(['admin'])->group(function () {
         // simpan route admin dibawah ini
 
-        Route::resource('timteknis', TimlokusController::class);
-        Route::resource('pekerjaan', PekerjaanController::class);
-        Route::resource('perusahaan', PerusahaanController::class);
-        Route::resource('kontrak', KontrakController::class);
-        Route::get('ajax/{sesi}', [KontrakController::class, 'ajax'])->name('pajax');
-        Route::resource('dokumenspk', DokumenspkController::class);
+        Route::resource('guru', GuruController::class);
         // SISTEM
         Route::resource('datapokok', DatapokokController::class);
     });

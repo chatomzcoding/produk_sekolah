@@ -15,27 +15,9 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{{ url('/user')}}" class="nav-link">
+        <a href="{{ url('/guru')}}" class="nav-link">
           &nbsp;&nbsp;<i class="fas fa-user nav-icon"></i>
-          <p>User</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('/timteknis')}}" class="nav-link">
-          &nbsp;&nbsp;<i class="fas fa-user-tie nav-icon"></i>
-          <p>Tim Teknis</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('/pekerjaan')}}" class="nav-link">
-          &nbsp;&nbsp;<i class="fas fa-briefcase nav-icon"></i>
-          <p>Pekerjaan</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('/perusahaan')}}" class="nav-link">
-          &nbsp;&nbsp;<i class="fas fa-hotel nav-icon"></i>
-          <p>Perusahaan</p>
+          <p>Guru</p>
         </a>
       </li>
       <li class="nav-item">
