@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\Admin\DatapokokController;
 use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Sistem\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +40,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         // simpan route admin dibawah ini
 
         Route::resource('guru', GuruController::class);
+        Route::resource('profil', ProfilController::class);
+        Route::resource('siswa', SiswaController::class);
+        Route::resource('kelas', KelasController::class);
+        Route::resource('mapel', MapelController::class);
         // SISTEM
         Route::resource('datapokok', DatapokokController::class);
     });

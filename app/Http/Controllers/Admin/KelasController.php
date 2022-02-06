@@ -15,7 +15,13 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        $menu   = 'kelas';
+        $main   = [
+            'link' => 'kelas'
+        ];
+        $kelas  = Kelas::all();
+
+        return view('admin.kelas.index', compact('menu','main','kelas'));
     }
 
     /**

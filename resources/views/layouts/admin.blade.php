@@ -1,5 +1,6 @@
 @php
     $user = Auth::user();
+    $profil = DbSistem::showtablefirst('profil');
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -12,7 +13,7 @@
 
   <title>@yield('title')</title>
 
-  <link rel="shortcut icon" href="{{ asset('/img/logo.png')}}">
+  <link rel="shortcut icon" href="{{ asset('/img/'.$profil->logo)}}">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -148,8 +149,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/dashboard')}}" class="brand-link">
-      <img src="{{ asset('img/logo.png')}}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ADEKSDAKOTA</span>
+      <img src="{{ asset('img/'.$profil->logo)}}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SISTEM SEKOLAH</span>
     </a>
 
     <!-- Sidebar -->

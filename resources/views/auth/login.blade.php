@@ -1,3 +1,7 @@
+@php
+    $profil = DbSistem::showtablefirst('profil');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Masuk Terlebih dahulu</title>
 
-  <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('img/'.$profil->logo) }}" type="image/x-icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -18,7 +22,7 @@
   <style type="text/css">
     body {
       /* background-color: red; */
-      background-image: url('{{ asset("img/bg-login.jpg")}}'); 
+      background-image: url('{{ asset("img/".$profil->gambar)}}'); 
       background-size : cover;
       background-position: center; 
       width : auto;
@@ -33,9 +37,9 @@
   <div class="card card-outline card-primary">
     <div class="card-header">
       {{-- <a href="#" class="h1"><b>Chatomz</b>Company</a> --}}
-      <section class="p-3 m-3 text-center">
-        <img src="{{ asset('/img/logo.png')}}" alt="" width="200px">
-        <h3>ADEKSDAKOTA</h3>
+      <section class="p-1 m-3 text-center">
+        <img src="{{ asset('/img/'.$profil->logo)}}" alt="" width="200px">
+        <h5>SISTEM INFORMASI <br>{{ $profil->nama_sekolah }}</h5>
       </section>
     </div>
     <div class="card-body">
@@ -45,7 +49,6 @@
                 {{ session('status') }}
             </div>
         @endif
-
       <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="input-group mb-3">

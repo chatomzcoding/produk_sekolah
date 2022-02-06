@@ -15,7 +15,13 @@ class MapelController extends Controller
      */
     public function index()
     {
-        //
+        $menu   = 'mapel';
+        $main   = [
+            'link' => 'mapel'
+        ];
+
+        $mapel  = Mapel::all();
+        return view('admin.mapel.index', compact('menu','main','mapel'));
     }
 
     /**

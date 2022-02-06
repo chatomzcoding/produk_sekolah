@@ -15,7 +15,13 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $menu   = 'kelas';
+        $main   = [
+            'link' => 'kelas'
+        ];
+        $siswa  = Siswa::all();
+
+        return view('admin.siswa.index', compact('menu','main','siswa'));
     }
 
     /**
