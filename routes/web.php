@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\DatapokokController;
+use App\Http\Controllers\Admin\FasilitasController;
 use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\MapelController;
 use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TaglineController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Sistem\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +43,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // Route Admin
     Route::middleware(['admin'])->group(function () {
         // simpan route admin dibawah ini
-
+        Route::resource('slider', SliderController::class);
+        Route::resource('program', ProgramController::class);
+        Route::resource('tagline', TaglineController::class);
+        Route::resource('fasilitas', FasilitasController::class);
         Route::resource('guru', GuruController::class);
         Route::resource('profil', ProfilController::class);
         Route::resource('siswa', SiswaController::class);
@@ -52,15 +59,3 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::resource('user', UserController::class);
 });
-
-// --------------------------------------------------------------------------------------------
-// PENGUJIAN DLL
-// --------------------------------------------------------------------------------------------
-// Cetak PDF dengan dompdf packgake
-Route::get('/cetak/lihat','App\Http\Controllers\Pengujian\PrintpdfController@get');
-Route::get('/cetak/download','App\Http\Controllers\Pengujian\PrintpdfController@out');
-// --------------------------------------------------------------------------------------------
-
-// ADEK SDA
-Route::get('/halaman/{sesi}','App\Http\Controllers\HomeController@halaman');
-
