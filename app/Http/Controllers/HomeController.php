@@ -10,8 +10,12 @@ use App\Models\Kontrak;
 use App\Models\Mapel;
 use App\Models\Pekerjaan;
 use App\Models\Perusahaan;
+use App\Models\Program;
 use App\Models\Siswa;
+use App\Models\Slider;
+use App\Models\Tagline;
 use App\Models\Timlokus;
+use App\Models\Waktu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,15 +34,4 @@ class HomeController extends Controller
         return view('admin.dashboard', compact('menu','statistik'));
     }
 
-    public function migrasi()
-    {
-        $data   = DB::table('kelas_lama')->get();
-
-        foreach ($data as $item) {
-            Kelas::create([
-                'nama_kelas' => $item->nama_kelas,
-            ]);
-        }
-    }
-    
 }
