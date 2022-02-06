@@ -21,15 +21,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('/kelas')}}" class="nav-link">
+        <a href="{{ url('/artikel')}}" class="nav-link">
           &nbsp;&nbsp;<i class="fas fa-file nav-icon"></i>
-          <p>Kelas</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('/siswa')}}" class="nav-link">
-          &nbsp;&nbsp;<i class="fas fa-users nav-icon"></i>
-          <p>Siswa</p>
+          <p>Artikel</p>
         </a>
       </li>
       <li class="nav-item">

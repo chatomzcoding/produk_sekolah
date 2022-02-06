@@ -15,7 +15,12 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+        $menu   = 'artikel';
+        $main   = [
+            'link' => 'artikel'
+        ];
+        $artikel = Artikel::all();
+        return view('admin.artikel.index', compact('menu','main','artikel'));
     }
 
     /**

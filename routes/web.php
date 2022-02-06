@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\DatapokokController;
 use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\KelasController;
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('siswa', SiswaController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('mapel', MapelController::class);
+        Route::resource('artikel', ArtikelController::class);
         // SISTEM
         Route::resource('datapokok', DatapokokController::class);
     });
