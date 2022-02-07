@@ -73,8 +73,35 @@
 							<nav class="main_nav_contaner ml-auto">
 								<ul class="main_nav">
 									<li class="{{ menu('/')}}"><a href="{{ url('/')}}">Beranda </a></li>
-									<li class="{{ menu('/homepage/profil')}}"><a href="{{ url('/homepage/profil')}}">Profil Sekolah</a></li>
-									<li class="{{ menu('/homepage/artikel')}}"><a href="{{ url('/homepage/artikel')}}">Artikel</a></li>
+									{{-- <li class="{{ menu('/homepage/profil')}}"><a href="{{ url('/homepage/profil')}}">Profil Sekolah</a></li> --}}
+									<li>
+										<div class="dropdown">
+											<a class="dropdown-toggle text-dark" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  Profil Sekolah
+											</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											  <a class="dropdown-item" href="{{ url('infoprofil/sejarah') }}">Sejarah</a>
+											  <a class="dropdown-item" href="{{ url('infoprofil/visimisi') }}">Visi & Misi</a>
+											  <a class="dropdown-item" href="{{ url('infoprofil/tugasfungsi') }}">Tugas & Fungsi</a>
+											  <a class="dropdown-item" href="{{ url('infoprofil/profilpimpinan') }}">Profil Pimpinan</a>
+											  <a class="dropdown-item" href="{{ url('infoprofil/strukturorganisasi') }}">Struktur Organisasi</a>
+											  <a class="dropdown-item" href="{{ url('infoprofil/linkdapodik') }}">Link Dapodik</a>
+											</div>
+										  </div>
+									</li>
+									<li>
+										<div class="dropdown">
+											<a class="dropdown-toggle text-dark" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  Informasi
+											</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+											  <a class="dropdown-item" href="{{ url('informasi/artikel') }}">Artikel</a>
+											  <a class="dropdown-item" href="{{ url('informasi/berita') }}">Berita</a>
+											  <a class="dropdown-item" href="{{ url('informasi/kegiatan') }}">Info Kegiatan</a>
+											</div>
+										  </div>
+									</li>
+									{{-- <li class="{{ menu('/homepage/artikel')}}"><a href="{{ url('/homepage/artikel')}}">Artikel</a></li> --}}
 									<li class="{{ menu('/homepage/kontak')}}"><a href="{{ url('/homepage/kontak')}}">Kontak</a></li>
 								</ul>
 								<div class="hamburger menu_mm">
@@ -193,11 +220,8 @@
 											<li><a href="{{ url('/')}}">Beranda</a></li>
 											<li><a href="{{ url('/homepage/profil')}}">Profil Sekolah</a></li>
 											<li><a href="{{ url('/homepage/kontak')}}">Kontak</a></li>
-											<!-- <li><a href="#">Features</a></li> -->
-											<!-- <li><a href="courses.html">Courses</a></li> -->
 											<li><a href="{{ url('/homepage/artikel')}}">Artikel</a></li>
-											{{-- <li><a href="#">Galeri</a></li> --}}
-											<!-- <li><a href="#">FAQs</a></li> -->
+											
 										</ul>
 									</div>
 								</div>

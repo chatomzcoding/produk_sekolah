@@ -74,4 +74,48 @@ class HomepageController extends Controller
         $fasilitas         = Fasilitas::all();
         return view('homepage.fasilitas', compact('fasilitas'));
     }
+
+    public function infoprofil($sesi)
+    {
+        switch ($sesi) {
+            case 'sejarah':
+                $profil         = Profil::first();
+                return view('homepage.info.sejarah', compact('profil'));
+                break;
+            case 'visimisi':
+                $profil         = Profil::first();
+                return view('homepage.info.visimisi', compact('profil'));
+                break;
+            case 'tugasfungsi':
+                $profil         = Profil::first();
+                return view('homepage.info.tugasfungsi', compact('profil'));
+                break;
+            case 'profilpimpinan':
+                $profil         = Profil::first();
+                return view('homepage.info.profilpimpinan', compact('profil'));
+                break;
+            case 'strukturorganisasi':
+                $profil         = Profil::first();
+                return view('homepage.info.strukturorganisasi', compact('profil'));
+                break;
+            
+            default:
+                return 'belum ada sesi';
+                break;
+        }
+    }
+    public function informasi($sesi)
+    {
+        switch ($sesi) {
+            case 'artikel':
+                $kontak     = Infowebsite::first();
+                $artikel    = Artikel::all();
+                return view('homepage.blog.index', compact('kontak','artikel'));
+                break;
+            
+            default:
+                return 'belum ada sesi';
+                break;
+        }
+    }
 }
