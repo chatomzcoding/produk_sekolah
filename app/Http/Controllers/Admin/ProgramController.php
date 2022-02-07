@@ -15,7 +15,14 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        $menu   = 'program';
+        $main   = [
+            'link' => 'program'
+        ];
+
+        $program    = Program::all();
+
+        return view('admin.program.index', compact('menu','main','program'));
     }
 
     /**

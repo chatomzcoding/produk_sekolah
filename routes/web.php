@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TaglineController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Sistem\UserController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -25,11 +26,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// HOMEPAGE
-Route::get('/', function ()
-{
-    return redirect('login');
-});
+
+// ROUTE HOMEPAGE
+Route::get('/', [HomepageController::class, 'index']);
+Route::get('/homepage/artikel', [HomepageController::class , 'artikel']);
+Route::get('/homepage/kontak', [HomepageController::class ,'kontak']);
+Route::get('/homepage/profil', [HomepageController::class ,'profil']);
+Route::get('/homepage/artikel/{id}', [HomepageController::class ,'showartikel']);
+
+Route::get('/homepage/program', [HomepageController::class ,'program']);
+Route::get('/homepage/guru', [HomepageController::class ,'guru']);
+Route::get('/homepage/fasilitas', [HomepageController::class ,'fasilitas']);
 /*
 -------------------------------------------------------------------------------------------------
 */

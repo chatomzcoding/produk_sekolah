@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
 @section('title')
-    Data Guru
+    Data Pendidik dan Tenaga Kependidikan
 @endsection
 
 @section('header')
     <div class="row mb-2">
         <div class="col-sm-6">
-        <h1 class="m-0">Data Guru</h1>
+        <h1 class="m-0">Data Pendidik dan Tenaga Kependidikan</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-            <li class="breadcrumb-item active">Daftar Guru</li>
+            <li class="breadcrumb-item active">Daftar Pendidik dan Tenaga Kependidikan</li>
         </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -21,60 +21,6 @@
 @section('content')
     
     <div class="container-fluid">
-        <div class="row">
-            {{-- start col --}}
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-list"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Info Statistik</span>
-                  <span class="info-box-number">
-                        {{-- {{ $main['statistik']['total-siswa']}} --}}
-                  </span>
-                </div>
-              </div>
-            </div>
-            {{-- end col --}}
-            {{-- start col --}}
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Info Statistik</span>
-                  <span class="info-box-number">
-                        {{-- {{ $main['statistik']['total-l']}} --}}
-                  </span>
-                </div>
-              </div>
-            </div>
-            {{-- end col --}}
-            {{-- start col --}}
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-list"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Info Statistik</span>
-                  <span class="info-box-number">
-                        {{-- {{ $main['statistik']['total-p']}} --}}
-                  </span>
-                </div>
-              </div>
-            </div>
-            {{-- end col --}}
-            {{-- start col --}}
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-list"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Info Statistik</span>
-                  <span class="info-box-number">
-                        {{-- {{ $main['statistik']['total-aktif']}} --}}
-                  </span>
-                </div>
-              </div>
-            </div>
-            {{-- end col --}}
-        </div>
         <div class="row">
           <!-- left column -->
           <div class="col-md-12">

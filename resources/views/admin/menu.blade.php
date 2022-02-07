@@ -53,7 +53,7 @@
       <li class="nav-item">
         <a href="{{ url('/guru')}}" class="nav-link">
           &nbsp;&nbsp;<i class="fas fa-user nav-icon"></i>
-          <p>Guru</p>
+          <p>Data Pendidik</p>
         </a>
       </li>
       <li class="nav-item">
