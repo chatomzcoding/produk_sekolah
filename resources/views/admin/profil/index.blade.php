@@ -26,14 +26,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                {{-- <h3 class="card-title">Daftar Unit</h3> --}}
-                    <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data Guru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
-                    <div class="float-right">
-                        {{-- <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="btn btn-outline-info btn-sm  pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print"></i> CETAK</a> --}}
-                        <a href="#" data-toggle="modal" data-target="#info" class="btn btn-outline-info btn-sm  pop-info" title="Informasi"><i class="fas fa-info"></i> INFO</a>
-                    </div>
-              </div>
               <div class="card-body">
                     @include('sistem.notifikasi')
                     <form action="{{ url($main['link'].'/'.$profil->id) }}" method="post">

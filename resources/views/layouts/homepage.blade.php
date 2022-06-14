@@ -2,6 +2,7 @@
 	$info = DbSistem::showtablefirst('info_website');
     $kontak     = json_decode($info->kontak);
     $sosialmedia     = json_decode($info->sosial_media);
+    $profil = DbSistem::showtablefirst('profil');
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,8 @@
 <title>Sistem Akademik Sekolah</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="{{ asset('/img/'.$profil->logo)}}">
+
 <meta name="description" content="Unicat project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{{ asset('unicat/styles/bootstrap4/bootstrap.min.css')}}">
@@ -67,7 +70,8 @@
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
 								<a href="{{ url('/')}}">
-									<div class="logo_text">Si<span>akad</span></div>
+									<img src="{{ asset('/img/'.$profil->logo)}}" alt="" width="50px">
+									<div class="logo_text" style="font-size: 16px"><span>{{ ucwords($profil->nama_sekolah) }}</span></div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner ml-auto">
@@ -98,6 +102,10 @@
 											  <a class="dropdown-item" href="{{ url('informasi/artikel') }}">Artikel</a>
 											  <a class="dropdown-item" href="{{ url('informasi/berita') }}">Berita</a>
 											  <a class="dropdown-item" href="{{ url('informasi/kegiatan') }}">Info Kegiatan</a>
+											  <a class="dropdown-item" href="https://play.google.com/store/apps/details?id=id.justapp.android60fd14a68adf1" target="_blank">Mobile E-Library</a>
+											  <a class="dropdown-item" href="https://builder.justapp.id/60fd14a68ae23" target="_blank">Aplikasi E-Library</a>
+											  <a class="dropdown-item" href="https://perpus.slbputrahanjuang.penggerak.web.id/" target="_blank">Perpustakaan Online</a>
+											  <a class="dropdown-item" href=" https://perpus.slbputrahanjuang.penggerak.web.id/index.php?p=login" target="_blank">Perpustakaan Login</a>
 											</div>
 										  </div>
 									</li>
