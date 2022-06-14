@@ -32,6 +32,7 @@ Route::get('/', [HomepageController::class, 'index']);
 Route::get('/homepage/artikel', [HomepageController::class , 'artikel']);
 Route::get('/homepage/kontak', [HomepageController::class ,'kontak']);
 Route::get('/homepage/profil', [HomepageController::class ,'profil']);
+Route::get('/homepage/ppdb', [HomepageController::class ,'ppdb']);
 Route::get('/homepage/artikel/{id}', [HomepageController::class ,'showartikel']);
 Route::get('/infoprofil/{sesi}', [HomepageController::class ,'infoprofil']);
 Route::get('/informasi/{sesi}', [HomepageController::class ,'informasi']);

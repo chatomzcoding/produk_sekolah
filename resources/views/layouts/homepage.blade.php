@@ -109,7 +109,7 @@
 											</div>
 										  </div>
 									</li>
-									{{-- <li class="{{ menu('/homepage/artikel')}}"><a href="{{ url('/homepage/artikel')}}">Artikel</a></li> --}}
+									<li class="{{ menu('/homepage/ppdb')}}"><a href="{{ url('/homepage/ppdb')}}">PPDB</a></li>
 									<li class="{{ menu('/homepage/kontak')}}"><a href="{{ url('/homepage/kontak')}}">Kontak</a></li>
 								</ul>
 								<div class="hamburger menu_mm">

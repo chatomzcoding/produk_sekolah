@@ -52,6 +52,12 @@ class HomepageController extends Controller
         $kontak         = Infowebsite::first();
         return view('homepage.kontak', compact('kontak'));
     }
+    public function ppdb()
+    {
+        $kontak         = Infowebsite::first();
+        $profil         = Profil::first();
+        return view('homepage.ppdb', compact('profil','kontak'));
+    }
 
     public function profil()
     {
