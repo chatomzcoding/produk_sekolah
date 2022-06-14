@@ -33,6 +33,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{{ url('/ppdb')}}" class="nav-link">
+          &nbsp;&nbsp;<i class="fas fa-file nav-icon"></i>
+          <p>PPDB</p>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{{ url('/datapokok')}}" class="nav-link">
           &nbsp;&nbsp;<i class="fas fa-hotel nav-icon"></i>
           <p>Data Pokok</p>

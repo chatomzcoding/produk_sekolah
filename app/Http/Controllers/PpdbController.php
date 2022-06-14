@@ -14,7 +14,9 @@ class PpdbController extends Controller
      */
     public function index()
     {
-        //
+        $ppdb   = Ppdb::latest()->get();
+        $menu   = 'ppdb';
+        return view('admin.ppdb.index', compact('ppdb','menu'));
     }
 
     /**
@@ -50,6 +52,7 @@ class PpdbController extends Controller
             'no_akta' => $request->no_akta,
             'agama' => $request->agama,
             'warga_negara' => $request->warga_negara,
+            'nama_negara' => $request->nama_negara,
             'khusus' => $request->khusus,
             'alamat' => $request->alamat,
             'rt' => $request->rt,
@@ -92,7 +95,7 @@ class PpdbController extends Controller
                 'khsusus' => $request->khsusus_ibu,
             ],
             'wali' => [
-                'nama' => $request->nama_wali_wali,
+                'nama' => $request->nama_wali,
                 'nik' => $request->nik_wali,
                 'tahun_lahir' => $request->tahun_lahir_wali,
                 'pendidikan' => $request->pendidikan_wali,
@@ -106,6 +109,7 @@ class PpdbController extends Controller
             'bb' => $request->bb,
             'lk' => $request->lk,
             'jarak' => $request->jarak,
+            'saudara' => $request->saudara,
             'nilai_jarak' => $request->nilai_jarak,
             'waktu' => [
                 'jam' => $request->jam,
@@ -119,9 +123,9 @@ class PpdbController extends Controller
                 $prestasi[] = [
                     'jenis' => $request->jenis_prestasi[$i],
                     'tingkat' => $request->tingkat[$i],
-                    'nama' => $request->nama[$i],
-                    'tahun' => $request->tahun[$i],
-                    'penyelenggaran' => $request->penyelenggaran[$i],
+                    'nama' => $request->nama_prestasi[$i],
+                    'tahun' => $request->tahun_prestasi[$i],
+                    'penyelenggaran' => $request->penyelenggara[$i],
                 ];
             }
         }
@@ -141,16 +145,16 @@ class PpdbController extends Controller
         $kesejahteraan = [
             'jenis' => $request->jenis_kesejahteraan,
             'no_kartu' => $request->no_kartu,
-            'nama_dikartu' => $request->nama_dikartu,
+            'nama_kartu' => $request->nama_kartu,
         ];
         Ppdb::create([
             'no_pendaftaran' => $no_pendaftaran,
-            'pesertadidik' => $pesertadidik,
-            'orangtua' => $orangtua,
-            'priodik' => $priodik,
-            'prestasi' => $prestasi,
-            'beasiswa' => $beasiswa,
-            'kesejahteraan' => $kesejahteraan,
+            'pesertadidik' => json_encode($pesertadidik),
+            'orangtua' => json_encode($orangtua),
+            'priodik' => json_encode($priodik),
+            'prestasi' => json_encode($prestasi),
+            'beasiswa' => json_encode($beasiswa),
+            'kesejahteraan' => json_encode($kesejahteraan),
         ]);
 
         return redirect('homepage/ppdb?s=selesai&no='.$no_pendaftaran);

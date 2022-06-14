@@ -6,6 +6,7 @@ use App\Models\Artikel;
 use App\Models\Fasilitas;
 use App\Models\Guru;
 use App\Models\Infowebsite;
+use App\Models\Ppdb;
 use App\Models\Profil;
 use App\Models\Program;
 use App\Models\Slider;
@@ -54,9 +55,12 @@ class HomepageController extends Controller
     }
     public function ppdb()
     {
+        $s = (isset($_GET['s'])) ? $_GET['s'] : 'index' ;
+        $no = (isset($_GET['no'])) ? $_GET['no'] : 0 ;
+        $ppdb   = Ppdb::where('no_pendaftaran',$no)->first();
         $kontak         = Infowebsite::first();
         $profil         = Profil::first();
-        return view('homepage.ppdb', compact('profil','kontak'));
+        return view('homepage.ppdb', compact('profil','kontak','s','ppdb'));
     }
 
     public function profil()
