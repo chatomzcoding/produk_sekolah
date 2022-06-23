@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -15,13 +16,12 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $menu   = 'kelas';
         $main   = [
-            'link' => 'kelas'
+            'link' => 'siswa'
         ];
-        $siswa  = Siswa::all();
-
-        return view('admin.siswa.index', compact('menu','main','siswa'));
+        $siswa  = Siswa::orderBy('nama','ASC')->get();
+        $kelas  = Kelas::all();
+        return view('admin.siswa.index', compact('main','siswa','kelas'));
     }
 
     /**
@@ -42,7 +42,9 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Siswa::create($request->all());
+
+        return back()->with('ds','Siswa');
     }
 
     /**
@@ -74,9 +76,16 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Siswa $siswa)
+    public function update(Request $request)
     {
-        //
+        Siswa::where('id',$request->id)->update([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'alamat' => $request->alamat,
+            'kelas' => $request->kelas,
+            'kekhususan' => $request->kekhususan,
+        ]);
+        return back()->with('du','Siswa');
     }
 
     /**
