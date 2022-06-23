@@ -57,6 +57,17 @@ class MateriController extends Controller
 
                 return back()->with('ds','Materi');
                 break;
+            case 'tugas':
+                Materi::create([
+                    'lms_id' => $request->lms_id,
+                    'sesi' => $request->sesi,
+                    'nama' => $request->nama,
+                    'link' => $request->link,
+                    'rincian' => $request->rincian,
+                ]);
+
+                return back()->with('ds','Tugas');
+                break;
             
             default:
                 # code...
@@ -96,9 +107,9 @@ class MateriController extends Controller
      */
     public function update(Request $request)
     {
+        $materi     = Materi::find($request->id);
         switch ($request->sesi) {
             case 'materi':
-                $materi     = Materi::find($request->id);
                 if (isset($request->file)) {
                     $request->validate([
                         'file' => 'required|mimes:pdf|max:10000',
@@ -122,6 +133,14 @@ class MateriController extends Controller
 
                 return back()->with('du','Materi');
                 break;
+            case 'tugas':
+                Materi::where('id',$materi->id)->update([
+                    'nama' => $request->nama,
+                    'link' => $request->link,
+                    'rincian' => $request->rincian,
+                ]);
+                return back()->with('ds','Tugas');
+                break;
             
             default:
                 # code...
@@ -139,7 +158,8 @@ class MateriController extends Controller
     {
         $tujuan_upload = 'public/lms/file';
         deletefile($tujuan_upload.'/'.$materi->file);
+        $sesi  = $materi->sesi;
         $materi->delete();
-        return back()->with('dd','Materi');
+        return back()->with('dd',$sesi);
     }
 }

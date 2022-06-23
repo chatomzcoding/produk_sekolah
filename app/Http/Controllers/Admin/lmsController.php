@@ -57,10 +57,11 @@ class lmsController extends Controller
     {
         $lms    = Lms::find($lms);
         $materifile = $lms->materi->where('sesi','materi');
+        $tugas = $lms->materi->where('sesi','tugas');
         $main   = [
             'link' => 'materi'
         ];
-        return view('admin.lms.show', compact('main','lms','materifile'));
+        return view('admin.lms.show', compact('main','lms','materifile','tugas'));
     }
 
     /**
