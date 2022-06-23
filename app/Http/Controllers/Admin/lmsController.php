@@ -7,7 +7,7 @@ use App\Models\Lms;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 
-class lmsController extends Controller
+class LmsController extends Controller
 {
     /**
      * Display a listing of the resource.
