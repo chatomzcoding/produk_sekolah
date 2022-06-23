@@ -119,26 +119,30 @@ class PpdbController extends Controller
 
         $prestasi = [];
         if (!is_null($request->jenis_prestasi)) {
-            for ($i=0; $i < count($request->jenis_prestasi); $i++) { 
-                $prestasi[] = [
-                    'jenis' => $request->jenis_prestasi[$i],
-                    'tingkat' => $request->tingkat[$i],
-                    'nama' => $request->nama_prestasi[$i],
-                    'tahun' => $request->tahun_prestasi[$i],
-                    'penyelenggara' => $request->penyelenggara[$i],
-                ];
+            for ($i=0; $i < count($request->jenis_prestasi); $i++) {
+                if (!is_null($request->nama_prestasi[$i])) {
+                    $prestasi[] = [
+                        'jenis' => $request->jenis_prestasi[$i],
+                        'tingkat' => $request->tingkat[$i],
+                        'nama' => $request->nama_prestasi[$i],
+                        'tahun' => $request->tahun_prestasi[$i],
+                        'penyelenggara' => $request->penyelenggara[$i],
+                    ];
+                } 
             }
         }
 
         $beasiswa = [];
         if (!is_null($request->jenis_beasiswa)) {
             for ($i=0; $i < count($request->jenis_beasiswa); $i++) { 
-                $beasiswa[] = [
-                    'jenis' => $request->jenis_beasiswa[$i],
-                    'keterangan' => $request->keterangan[$i],
-                    'tahun_mulai' => $request->tahun_mulai[$i],
-                    'tahun_selesai' => $request->tahun_selesai[$i],
-                ];
+                if (!is_null($request->keterangan[$i])) {
+                    $beasiswa[] = [
+                        'jenis' => $request->jenis_beasiswa[$i],
+                        'keterangan' => $request->keterangan[$i],
+                        'tahun_mulai' => $request->tahun_mulai[$i],
+                        'tahun_selesai' => $request->tahun_selesai[$i],
+                    ];
+                }
             }
         }
 

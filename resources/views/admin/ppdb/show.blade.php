@@ -35,7 +35,7 @@
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Data Pribadi</a>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Data Orangtua/wali</a>
                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Rincian Peserta Didik</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Lainnya</a>
                       </div>
                     </div>
                     <div class="col-9">
@@ -80,6 +80,7 @@
                                 @php
                                     $priodik = json_decode($ppdb->priodik);
                                     $prestasi = json_decode($ppdb->prestasi);
+                                    $beasiswa = json_decode($ppdb->beasiswa);
                                 @endphp
                                 <div class="table-responsive">
                                     <table class="table table-borderless">
@@ -108,7 +109,7 @@
                                         </tr>
                                     </table>
                                     <h5>DATA PRESTASI</h5>
-                                    <table class="table table-borderless">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -132,10 +133,118 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    <h5>DATA BEASISWA</h5>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Jenis</th>
+                                                <th>Keterangan</th>
+                                                <th>Tahun Mulai</th>
+                                                <th>Tahun Selesai</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($beasiswa as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->jenis }}</td>
+                                                <td>{{ $item->keterangan }}</td>
+                                                <td>{{ $item->tahun_mulai }}</td>
+                                                <td>{{ $item->tahun_selesai }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                   </div>
                             </section>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                            <section>
+                                @php
+                                    $kes = json_decode($ppdb->kesejahteraan);
+                                    $file = json_decode($ppdb->dokumen);
+                                @endphp
+                                <h5>KESEJAHTERAAN PESERTA DIDIK</h5>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Jenis Kesejahteraan</th>
+                                        <td>{{ $kes->jenis}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>No kartu</th>
+                                        <td>{{ $kes->no_kartu}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama di Kartu</th>
+                                        <td>{{ $kes->nama_kartu}}</td>
+                                    </tr>
+                                </table>
+                                <h5>Dokumen Persyaratan</h5>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>KTP</th>
+                                        <td>
+                                            @if (is_null($file->dok_ktp))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_ktp) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kartu Keluarga</th>
+                                        <td>
+                                            @if (is_null($file->dok_kk))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_kk) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Poto</th>
+                                        <td>
+                                            @if (is_null($file->dok_poto))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_poto) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ijasah</th>
+                                        <td>
+                                            @if (is_null($file->dok_ijasah))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_ijasah) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Akta</th>
+                                        <td>
+                                            @if (is_null($file->dok_akta))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_akta) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>KIP</th>
+                                        <td>
+                                            @if (is_null($file->dok_kip))
+                                                tidak ada file
+                                            @else
+                                                <a href="{{ asset('dokumen/'.$file->dok_kip) }}" target="_blank">lihat dokumen</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </table>
+                            </section>
+                        </div>
                       </div>
                     </div>
                   </div>
