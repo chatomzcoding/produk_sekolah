@@ -37,6 +37,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Tempat Tanggal Lahir</th>
                                 <th>NIK</th>
+                                <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody class="text-capitalize">
@@ -46,10 +47,11 @@
                             @endphp
                             <tr>
                                     <td class="text-center">{{ $loop->iteration}}</td>
-                                    <td>{{ $peserta->tanggal}}</td>
+                                    <td>{{ date_indo($peserta->tanggal)}}</td>
                                     <td>{{ $peserta->nama}}</td>
                                     <td>{{ $peserta->tempat_lahir.', '.date_indo($peserta->tanggal_lahir)}}</td>
                                     <td>{{ $peserta->nik}}</td>
+                                    <td><a href="{{ url('ppdb/'.$item->id) }}" class="btn btn-info btn-sm">Selengkapnya</a></td>
                                 </tr>
                             @empty
                                 <tr class="text-center">

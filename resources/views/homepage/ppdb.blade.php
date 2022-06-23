@@ -37,7 +37,7 @@
             </header>
             @if ($s == 'index')
                 <main>
-                    <form action="{{ url('ppdb') }}" method="post">
+                    <form action="{{ url('ppdb') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <h4>DATA PRIBADI</h4>
@@ -539,6 +539,60 @@
                                     </div>
                                 </td>
                             </tr>
+                        </table>
+                        <h4>DOKUMEN PERSYARATAN</h4>
+                        <div class="alert alert-info">
+                            File unggahan berformat PDF
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td width="20%">File KTP Orang Tua<strong class="text-danger">*</strong></td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_ktp" class="form-control" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">File Kartu Keluarga<strong class="text-danger">*</strong></td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_kk" class="form-control" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">File Akta Peserta Didik<strong class="text-danger">*</strong></td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_akta" class="form-control" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">File Poto Peserta Didik<strong class="text-danger">*</strong></td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_poto" class="form-control" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">File Ijasah Peserta Didik (opsional)</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_ijasah" class="form-control">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">File KIP (opsional)</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="file" name="dok_kip" class="form-control">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="2" class="text-right">
                                     <button type="submit" class="btn btn-primary">KIRIM PENDAFTARAN</button>
@@ -551,7 +605,7 @@
                 <main class="mt-3">
                     <div class="alert alert-info">
                         <strong>BERHASIL</strong>
-                        Pendaftaran telah dikirim ke pihak sekolah, terima kasih telah mengisi Pendaftaran Online di Sekolah SLB Hanjuang
+                        Pendaftaran telah dikirim ke pihak sekolah, terima kasih telah mengisi Pendaftaran Online di Sekolah SLBS Hanjuang
                     </div>
                     <p>Berikut Ringkasan Pendaftaran</p>
                     <table class="table">

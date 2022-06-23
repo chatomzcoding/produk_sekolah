@@ -83,7 +83,7 @@ class PpdbController extends Controller
                 'pendidikan' => $request->pendidikan_ayah,
                 'pekerjaan' => $request->pekerjaan_ayah,
                 'penghasilan' => $request->penghasilan_ayah,
-                'khsusus' => $request->khsusus_ayah,
+                'khusus' => $request->khusus_ayah,
             ],
             'ibu' => [
                 'nama' => $request->nama_ibu,
@@ -92,7 +92,7 @@ class PpdbController extends Controller
                 'pendidikan' => $request->pendidikan_ibu,
                 'pekerjaan' => $request->pekerjaan_ibu,
                 'penghasilan' => $request->penghasilan_ibu,
-                'khsusus' => $request->khsusus_ibu,
+                'khusus' => $request->khusus_ibu,
             ],
             'wali' => [
                 'nama' => $request->nama_wali,
@@ -147,6 +147,27 @@ class PpdbController extends Controller
             'no_kartu' => $request->no_kartu,
             'nama_kartu' => $request->nama_kartu,
         ];
+
+        $data_dok    = ['dok_ktp','dok_kk','dok_poto','dok_ijasah','dok_akta','dok_kip'];
+        $dokumen     = [];
+        foreach ($data_dok as $dok) {
+            if (isset($request->$dok)) {
+                $request->validate([
+                    $dok => 'required|mimes:pdf|max:10000',
+                ]);
+                // menyimpan data file yang diupload ke variabel $file
+                $file = $request->file($dok);
+                
+                $namafile = time()."_".$file->getClientOriginalName();
+                $tujuan_upload = 'public/dokumen';
+                // isi dengan nama folder tempat kemana file diupload
+                $file->move($tujuan_upload,$namafile);
+            } else {
+                $namafile   = NULL;
+            }
+
+            $dokumen[$dok] = $namafile;
+        }
         Ppdb::create([
             'no_pendaftaran' => $no_pendaftaran,
             'pesertadidik' => json_encode($pesertadidik),
@@ -155,6 +176,7 @@ class PpdbController extends Controller
             'prestasi' => json_encode($prestasi),
             'beasiswa' => json_encode($beasiswa),
             'kesejahteraan' => json_encode($kesejahteraan),
+            'dokumen' => json_encode($dokumen),
         ]);
 
         return redirect('homepage/ppdb?s=selesai&no='.$no_pendaftaran);
@@ -168,7 +190,8 @@ class PpdbController extends Controller
      */
     public function show(Ppdb $ppdb)
     {
-        //
+        $menu = 'ppdb';
+        return view('admin.ppdb.show',compact('ppdb','menu'));
     }
 
     /**
