@@ -15,7 +15,9 @@ class TaglineController extends Controller
      */
     public function index()
     {
-        //
+        $tagline = Tagline::all();
+
+        return view('admin.tagline.index', compact('tagline'));
     }
 
     /**
@@ -36,7 +38,25 @@ class TaglineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'icon' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+        ]);
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('icon');
+        
+        $nama_file = time()."_".$file->getClientOriginalName();
+        
+        // isi dengan nama_tagline folder tempat kemana file diupload
+        $tujuan_upload = 'public/img/tagline';
+        $file->move($tujuan_upload,$nama_file);
+
+        Tagline::create([
+            'nama_tagline' => $request->nama_tagline,
+            'keterangan' => $request->keterangan,
+            'icon' => $nama_file,
+        ]);
+
+        return back()->with('ds','Tagline');
     }
 
     /**
@@ -68,9 +88,33 @@ class TaglineController extends Controller
      * @param  \App\Models\Tagline  $tagline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tagline $tagline)
+    public function update(Request $request)
     {
-        //
+        $tagline = Tagline::find($request->id);
+        if (isset($request->icon)) {
+            $request->validate([
+                'icon' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('icon');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama_tagline folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/tagline';
+            $file->move($tujuan_upload,$nama_file);
+            deletefile($tujuan_upload.'/'.$tagline->icon);
+        } else {
+            $nama_file = $tagline->icon;
+        }
+        
+
+        Tagline::where('id',$request->id)->update([
+            'nama_tagline' => $request->nama_tagline,
+            'keterangan' => $request->keterangan,
+            'icon' => $nama_file,
+        ]);
+        return back()->with('du','Tagline');
     }
 
     /**
@@ -81,6 +125,8 @@ class TaglineController extends Controller
      */
     public function destroy(Tagline $tagline)
     {
-        //
+        deletefile('public/img/tagline/'.$tagline->icon);
+        $tagline->delete();
+        return back()->with('dd','Tagline');
     }
 }
