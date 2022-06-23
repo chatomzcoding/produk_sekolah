@@ -43,7 +43,25 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+        ]);
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('gambar');
+        
+        $nama_file = time()."_".$file->getClientOriginalName();
+        
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'public/img/program';
+        $file->move($tujuan_upload,$nama_file);
+
+        Program::create([
+            'nama' => $request->nama,
+            'alias' => $request->alias,
+            'keterangan' => $request->keterangan,
+            'gambar' => $nama_file,
+        ]);
+        return back()->with('du','program');
     }
 
     /**
@@ -75,9 +93,33 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request)
     {
-        //
+        $program = Program::find($request->id);
+        if (isset($request->gambar)) {
+            $request->validate([
+                'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('gambar');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/program';
+            $file->move($tujuan_upload,$nama_file);
+            deletefile($tujuan_upload.'/'.$program->gambar);
+        } else {
+            $nama_file = $program->gambar;
+        }
+
+        Program::where('id',$request->id)->update([
+            'nama' => $request->nama,
+            'alias' => $request->alias,
+            'keterangan' => $request->keterangan,
+            'gambar' => $nama_file,
+        ]);
+        return back()->with('du','Program');
     }
 
     /**
@@ -88,6 +130,8 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        deletefile('public/img/program/'.$program->gambar);
+        $program->delete();
+        return back()->with('dd','Program');
     }
 }
