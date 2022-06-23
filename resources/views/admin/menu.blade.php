@@ -5,7 +5,7 @@
   </a>
 </li>
 <li class="nav-item">
-  <a href="{{ url('/lms')}}" class="nav-link">
+  <a href="{{ url('/datalms')}}" class="nav-link">
     <i class="nav-icon fas fa-book"></i>
     <p class="text">LMS</p>
   </a>

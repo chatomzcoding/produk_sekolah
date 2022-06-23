@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('guru', GuruController::class);
         Route::resource('profil', ProfilController::class);
         Route::resource('siswa', SiswaController::class);
-        Route::resource('lms', LmsController::class);
+        Route::resource('datalms', LmsController::class);
         Route::resource('materi', MateriController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('mapel', MapelController::class);
