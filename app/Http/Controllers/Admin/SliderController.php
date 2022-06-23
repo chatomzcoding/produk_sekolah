@@ -15,7 +15,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        $slider     = Slider::all();
+        return view('admin.slider.index', compact('slider'));
     }
 
     /**
@@ -36,7 +37,25 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+        ]);
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('gambar');
+        
+        $nama_file = time()."_".$file->getClientOriginalName();
+        
+        // isi dengan nama_slider folder tempat kemana file diupload
+        $tujuan_upload = 'public/img/slider';
+        $file->move($tujuan_upload,$nama_file);
+
+        Slider::create([
+            'nama_slider' => $request->nama_slider,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $nama_file,
+        ]);
+
+        return back()->with('ds','Slider');
     }
 
     /**
@@ -68,9 +87,33 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slider $slider)
+    public function update(Request $request)
     {
-        //
+        $slider = Slider::find($request->id);
+        if (isset($request->gambar)) {
+            $request->validate([
+                'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('gambar');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama_slider folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/slider';
+            $file->move($tujuan_upload,$nama_file);
+            deletefile($tujuan_upload.'/'.$slider->gambar);
+        } else {
+            $nama_file = $slider->gambar;
+        }
+        
+
+        Slider::where('id',$request->id)->update([
+            'nama_slider' => $request->nama_slider,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $nama_file,
+        ]);
+        return back()->with('du','Slider');
     }
 
     /**
@@ -79,8 +122,11 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slider $slider)
+    public function destroy($slider)
     {
-        //
+        $slider = Slider::find($slider);
+        deletefile('public/img/slider/'.$slider->gambar);
+        $slider->delete();
+        return back()->with('dd','Slider');
     }
 }
