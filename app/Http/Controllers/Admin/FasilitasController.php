@@ -15,7 +15,9 @@ class FasilitasController extends Controller
      */
     public function index()
     {
-        //
+        $fasilitas =  Fasilitas::all();
+
+        return view('admin.fasilitas.index', compact('fasilitas'));
     }
 
     /**
@@ -36,7 +38,29 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+        ]);
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('gambar');
+        
+        $nama_file = time()."_".$file->getClientOriginalName();
+        
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'public/img/fasilitas';
+        $file->move($tujuan_upload,$nama_file);
+
+        Fasilitas::create([
+            'nama' => $request->nama,
+            'alias' => $request->alias,
+            'tahun' => $request->tahun,
+            'kategori' => $request->kategori,
+            'keterangan' => $request->keterangan,
+            'gambar' => $nama_file,
+        ]);
+
+        return back()->with('ds','Fasilitas');
+
     }
 
     /**
@@ -70,7 +94,35 @@ class FasilitasController extends Controller
      */
     public function update(Request $request, Fasilitas $fasilitas)
     {
-        //
+        $fasilitas = Fasilitas::find($request->id);
+        if (isset($request->gambar)) {
+            $request->validate([
+                'gambar' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('gambar');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/fasilitas';
+            $file->move($tujuan_upload,$nama_file);
+            deletefile($tujuan_upload.'/'.$fasilitas->gambar);
+        } else {
+            $nama_file = $fasilitas->gambar;
+        }
+        
+
+        Fasilitas::where('id',$request->id)->update([
+            'nama' => $request->nama,
+            'alias' => $request->alias,
+            'tahun' => $request->tahun,
+            'kategori' => $request->kategori,
+            'keterangan' => $request->keterangan,
+            'gambar' => $nama_file,
+        ]);
+        return back()->with('du','Fasilitas');
+
     }
 
     /**
@@ -79,8 +131,11 @@ class FasilitasController extends Controller
      * @param  \App\Models\Fasilitas  $fasilitas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fasilitas $fasilitas)
+    public function destroy($fasilitas)
     {
-        //
+        $fasilitas = Fasilitas::find($fasilitas);
+        deletefile('public/img/fasilitas/'.$fasilitas->gambar);
+        $fasilitas->delete();
+        return back()->with('dd','Fasilitas');
     }
 }
