@@ -19,7 +19,7 @@ class LmsController extends Controller
         $lms    = Lms::all();
         $mapel  = Mapel::all();
         $main   = [
-            'link' => 'lms'
+            'link' => 'datalms'
         ];
         return view('admin.lms.index', compact('main','lms','mapel'));
     }
