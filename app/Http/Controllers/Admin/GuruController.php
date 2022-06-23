@@ -42,12 +42,29 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         if (isset($request->poto)) {
-            # code...
+            $request->validate([
+                'poto' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('poto');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/guru';
+            $file->move($tujuan_upload,$nama_file);
         } else {
-            Guru::create($request->all());
+            $nama_file = NULL;
         }
+        Guru::create([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'gelar' => $request->gelar,
+            'alamat' => $request->alamat,
+            'poto' => $nama_file,
+        ]);
 
-        return back()->with('successv2','Guru berhasil ditambahkan');
+        return back()->with('ds','Guru');
     }
 
     /**
@@ -81,18 +98,32 @@ class GuruController extends Controller
      */
     public function update(Request $request)
     {
+        $guru = Guru::find($request->id);
         if (isset($request->poto)) {
-            # code...
-        } else {
-            Guru::where('id',$request->id)->update([
-                'nama' => $request->nama,
-                'gelar' => $request->gelar,
-                'jk' => $request->jk,
-                'alamat' => $request->alamat,
+            $request->validate([
+                'poto' => 'required|file|image|mimes:jpeg,png,jpg|max:4000',
             ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('poto');
+            
+            $nama_file = time()."_".$file->getClientOriginalName();
+            
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'public/img/guru';
+            $file->move($tujuan_upload,$nama_file);
+            deletefile($tujuan_upload.'/'.$guru->poto);
+        } else {
+            $nama_file = $guru->poto;
         }
+        Guru::where('id',$request->id)->update([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'gelar' => $request->gelar,
+            'alamat' => $request->alamat,
+            'poto' => $nama_file,
+        ]);
 
-        return back()->with('successv2','Guru berhasil diperbaharui');
+        return back()->with('du','Guru');
         
     }
 
@@ -104,6 +135,9 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        $tujuan_upload = 'public/img/guru';
+        deletefile($tujuan_upload.'/'.$guru->poto);
+        $guru->delete();
+        return back()->with('dd','Guru');
     }
 }
