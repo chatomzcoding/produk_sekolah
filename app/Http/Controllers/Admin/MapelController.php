@@ -42,7 +42,9 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mapel::create($request->all());
+
+        return back()->with('ds','Mata Pelajaran');
     }
 
     /**
@@ -74,9 +76,16 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request)
     {
-        //
+        Mapel::where('id',$request->id)->update([
+            'nama_mapel' => $request->nama_mapel,
+            'no_urut' => $request->no_urut,
+            'kelompok' => $request->kelompok,
+            'tingkatan' => $request->tingkatan,
+        ]);
+
+        return back()->with('du','Mata Pelajaran');
     }
 
     /**
@@ -87,6 +96,8 @@ class MapelController extends Controller
      */
     public function destroy(Mapel $mapel)
     {
-        //
+        $mapel->delete();
+
+        return back()->with('dd','Mata Pelajaran');
     }
 }
