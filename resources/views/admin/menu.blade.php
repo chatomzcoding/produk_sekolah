@@ -5,6 +5,12 @@
   </a>
 </li>
 <li class="nav-item">
+  <a href="{{ url('/lms')}}" class="nav-link">
+    <i class="nav-icon fas fa-book"></i>
+    <p class="text">LMS</p>
+  </a>
+</li>
+<li class="nav-item">
     <a href="#" class="nav-link">
       <i class="nav-icon fas fa-layer-group"></i>
       <p>

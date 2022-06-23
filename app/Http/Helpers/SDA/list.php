@@ -34,6 +34,13 @@ if (! function_exists('kategorifasilitas')) {
         return $result;
     }
 }
+if (! function_exists('list_fase')) {
+    function list_fase()
+    {
+        $result = ['A','B','C','D','E','F'];
+        return $result;
+    }
+}
 
 if (! function_exists('kekhususan')) {
     function kekhususan()
