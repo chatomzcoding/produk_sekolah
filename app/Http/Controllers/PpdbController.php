@@ -125,7 +125,7 @@ class PpdbController extends Controller
                     'tingkat' => $request->tingkat[$i],
                     'nama' => $request->nama_prestasi[$i],
                     'tahun' => $request->tahun_prestasi[$i],
-                    'penyelenggaran' => $request->penyelenggara[$i],
+                    'penyelenggara' => $request->penyelenggara[$i],
                 ];
             }
         }
