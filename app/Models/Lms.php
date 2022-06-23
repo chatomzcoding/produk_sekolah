@@ -17,4 +17,9 @@ class Lms extends Model
     {
         return $this->belongsTo(Mapel::class);
     }
+
+    public function materi()
+    {
+        return $this->hasMany(Materi::class);
+    }
 }

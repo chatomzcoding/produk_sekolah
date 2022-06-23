@@ -53,9 +53,14 @@ class lmsController extends Controller
      * @param  \App\Models\Lms  $lms
      * @return \Illuminate\Http\Response
      */
-    public function show(Lms $lms)
+    public function show($lms)
     {
-        //
+        $lms    = Lms::find($lms);
+        $materifile = $lms->materi->where('sesi','materi');
+        $main   = [
+            'link' => 'materi'
+        ];
+        return view('admin.lms.show', compact('main','lms','materifile'));
     }
 
     /**

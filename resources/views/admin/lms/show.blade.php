@@ -19,21 +19,31 @@
                 <div class="card">
                   <div class="card-header">
                         <a href="{{ url('lms') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
-                        <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data Siswa" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah Materi</a>
                   </div>
-                  <div class="card-body">
+                </div>
+              </div>
+            </div>
+            {{-- materi file --}}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3>MATERI LMS</h3>
+                </div>
+                <div class="card-body">
+                      <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data Siswa" data-toggle="modal" data-target="#tambahmateri"><i class="fas fa-plus"></i> Tambah Materi</a>
                       <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="text-center">
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="10%">Aksi</th>
-                                    <th>Nama Pelajaran</th>
-                                    <th>Fase</th>
+                                    <th>Nama Materi</th>
+                                    <th>File</th>
                                 </tr>
                             </thead>
                             <tbody class="text-capitalize">
-                                @forelse ($lms as $item)
+                                @forelse ($materifile as $item)
                                 <tr>
                                         <td class="text-center">{{ $loop->iteration}}</td>
                                         <td class="text-center">
@@ -47,16 +57,16 @@
                                                       <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a href="{{ url('lms/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file text-primary"style="width: 25px"></i> DETAIL</a>
-                                                        <button type="button" data-toggle="modal" data-mapel_id="{{ $item->mapel_id }}" data-fase="{{ $item->fase }}" data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
+                                                        {{-- <a href="{{ url('lms/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file text-primary"style="width: 25px"></i> DETAIL</a> --}}
+                                                        <button type="button" data-toggle="modal" data-nama="{{ $item->nama }}" data-id="{{ $item->id }}" data-target="#ubahmateri" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                         </button>
                                                       <div class="dropdown-divider"></div>
                                                       <button onclick="deleteRow( {{ $item->id }} )" class="dropdown-item"><i class="fas fa-trash-alt text-danger"style="width: 25px"></i> HAPUS</button>
                                                     </div>
                                                 </div>
                                         </td>
-                                        <td>{{ $item->mapel->nama_mapel}}</td>
-                                        <td class="text-center">{{ $item->fase}}</td>
+                                        <td>{{ $item->nama}}</td>
+                                        <td><a href="{{ asset('lms/file/'.$item->file) }}" class="btn btn-info btn-sm" target="_blank">lihat materi</a></td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
@@ -71,13 +81,15 @@
             </div>
         </div>
         
-        <div class="modal fade" id="tambah">
+        <div class="modal fade" id="tambahmateri">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ url($main['link'])}}" method="post">
+                <form action="{{ url($main['link'])}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="sesi" value="materi">
+                    <input type="hidden" name="lms_id" value="{{ $lms->id }}">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data LMS</h4>
+                    <h4 class="modal-title">Tambah Data Materi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,22 +99,17 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group row">
-                                    <label class="col-md-4">Mata Pelajaran</label>
-                                    <select name="mapel_id" id="mapel_id" class="form-control col-md-8">
-                                        @foreach ($mapel as $item)
-                                            <option value="{{ $item->id}}">{{ strtoupper($item->nama_mapel)}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="col-md-4">Mata Materi</label>
+                                    <input type="text" name="nama" id="nama" class="form-control col-md-8">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group row">
-                                    <label class="col-md-4">Fase</label>
-                                        <select name="fase" id="fase" class="form-control col-md-8">
-                                            @foreach (list_fase() as $item)
-                                                <option value="{{ $item}}">{{ $item}}</option>
-                                            @endforeach
-                                        </select>
+                                    <label class="col-md-4">File Materi</label>
+                                    <div class="col-md-8">
+                                        <input type="file" name="file" id="file" class="from-control" required> <br>
+                                        <small class="text-danger">saat ini materi file berformat PDF</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -117,40 +124,36 @@
             </div>
         </div>
         
-        <div class="modal fade" id="ubah">
+        <div class="modal fade" id="ubahmateri">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ route($main['link'].'.update','test')}}" method="post">
+                <form action="{{ route($main['link'].'.update','test')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                 <div class="modal-header">
-                <h4 class="modal-title">Edit Data LMS</h4>
+                <h4 class="modal-title">Edit Data materi</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
                 <div class="modal-body p-3">
                     <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="sesi" value="materi">
                     <section class="p-3">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group row">
-                                    <label class="col-md-4">Mata Pelajaran</label>
-                                    <select name="mapel_id" id="mapel_id" class="form-control col-md-8">
-                                        @foreach ($mapel as $item)
-                                            <option value="{{ $item->id}}">{{ strtoupper($item->nama_mapel)}}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="col-md-4">Mata Materi</label>
+                                    <input type="text" name="nama" id="nama" class="form-control col-md-8">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group row">
-                                    <label class="col-md-4">Fase</label>
-                                        <select name="fase" id="fase" class="form-control col-md-8">
-                                            @foreach (list_fase() as $item)
-                                                <option value="{{ $item}}">{{ $item}}</option>
-                                            @endforeach
-                                        </select>
+                                    <label class="col-md-4">File Materi</label>
+                                    <div class="col-md-8">
+                                        <input type="file" name="file" id="file" class="from-control"> <br>
+                                        <small class="text-danger">saat ini materi file berformat PDF <br>upload jika ingin merubah materi</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -167,16 +170,14 @@
     </x-slot>
     <x-slot name="kodejs">
         <script>
-            $('#ubah').on('show.bs.modal', function (event) {
+            $('#ubahmateri').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
-                var mapel_id = button.data('mapel_id')
-                var fase = button.data('fase')
+                var nama = button.data('nama')
                 var id = button.data('id')
         
                 var modal = $(this)
         
-                modal.find('.modal-body #mapel_id').val(mapel_id);
-                modal.find('.modal-body #fase').val(fase);
+                modal.find('.modal-body #nama').val(nama);
                 modal.find('.modal-body #id').val(id);
             })
         </script>

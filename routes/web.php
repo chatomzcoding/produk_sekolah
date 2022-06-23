@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\lmsController;
 use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\MateriController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\SiswaController;
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('profil', ProfilController::class);
         Route::resource('siswa', SiswaController::class);
         Route::resource('lms', lmsController::class);
+        Route::resource('materi', MateriController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('mapel', MapelController::class);
         Route::resource('artikel', ArtikelController::class);
