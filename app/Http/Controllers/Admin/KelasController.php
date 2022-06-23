@@ -42,7 +42,9 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Kelas::create($request->all());
+
+        return back()->with('ds','kelas');
     }
 
     /**
@@ -74,9 +76,13 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request)
     {
-        //
+        Kelas::where('id',$request->id)->update([
+            'nama_kelas' => $request->nama_kelas
+        ]);
+
+        return back()->with('du','kelas');
     }
 
     /**
@@ -85,8 +91,10 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy($kelas)
     {
-        //
+        $kelas = Kelas::find($kelas)->delete();
+        return back()->with('dd','kelas');
+
     }
 }
