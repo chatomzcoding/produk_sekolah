@@ -101,7 +101,7 @@
 											<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 											  <a class="dropdown-item" href="{{ url('informasi/artikel') }}">Artikel</a>
 											  <a class="dropdown-item" href="{{ url('informasi/berita') }}">Berita</a>
-											  <a class="dropdown-item" href="{{ url('informasi/kegiatan') }}">Info Kegiatan</a>
+											  <a class="dropdown-item" href="{{ url('informasi/info') }}">Info Kegiatan</a>
 											  <a class="dropdown-item" href="https://play.google.com/store/apps/details?id=id.justapp.android60fd14a68adf1" target="_blank">Mobile E-Library</a>
 											  <a class="dropdown-item" href="https://builder.justapp.id/60fd14a68ae23" target="_blank">Aplikasi E-Library</a>
 											  <a class="dropdown-item" href="https://perpus.slbputrahanjuang.penggerak.web.id/" target="_blank">Perpustakaan Online</a>

@@ -119,8 +119,19 @@ class HomepageController extends Controller
         switch ($sesi) {
             case 'artikel':
                 $kontak     = Infowebsite::first();
-                $artikel    = Artikel::all();
-                return view('homepage.blog.index', compact('kontak','artikel'));
+                $data    = Artikel::where('sesi','artikel')->get();
+                return view('homepage.blog.index', compact('kontak','data','sesi'));
+                break;
+            case 'berita':
+                $kontak     = Infowebsite::first();
+                $data    = Artikel::where('sesi','berita')->get();
+                return view('homepage.blog.index', compact('kontak','data','sesi'));
+                break;
+            case 'info':
+                $kontak     = Infowebsite::first();
+                $data    = Artikel::where('sesi','info')->get();
+                $sesi   = 'info kegiatan';
+                return view('homepage.blog.index', compact('kontak','data','sesi'));
                 break;
             
             default:

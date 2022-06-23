@@ -1,4 +1,4 @@
-<x-admin-layout title="data LMS" menu="lms">
+<x-admin-layout title="Data LMS" menu="lms">
     <x-slot name="header">
         <div class="row mb-2">
             <div class="col-sm-6">

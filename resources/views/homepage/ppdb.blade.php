@@ -605,7 +605,7 @@
                 <main class="mt-3">
                     <div class="alert alert-info">
                         <strong>BERHASIL</strong>
-                        Pendaftaran telah dikirim ke pihak sekolah, terima kasih telah mengisi Pendaftaran Online di Sekolah SLBS Hanjuang
+                        Pendaftaran telah dikirim ke pihak sekolah, terima kasih telah mengisi Pendaftaran Online di Sekolah SLBS Putra Hanjuang
                     </div>
                     <p>Berikut Ringkasan Pendaftaran</p>
                     <table class="table">

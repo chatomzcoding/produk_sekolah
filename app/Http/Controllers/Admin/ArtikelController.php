@@ -56,6 +56,7 @@ class ArtikelController extends Controller
         Artikel::create([
             'judul' => $request->judul,
             'isi' => $request->isi,
+            'sesi' => $request->sesi,
             'view' => 0,
             'gambar' => $nama_file,
         ]);
@@ -128,7 +129,6 @@ class ArtikelController extends Controller
      */
     public function destroy(Artikel $artikel)
     {
-        // $artikel = Artikel::find($artikel);
         deletefile('public/img/artikel/'.$artikel->gambar);
         $artikel->delete();
         return back()->with('dd','Artikel');

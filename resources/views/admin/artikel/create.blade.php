@@ -23,6 +23,7 @@
                   <div class="card-body">
                     <form action="{{ url('/artikel')}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="sesi" value="artikel">
                         <div class="form-group">
                             <label for="">Judul Artikel</label>
                             <input type="text" name="judul" class="form-control" placeholder="masukkan judul artikel artikel" value="{{ old('judul')}}" autocomplete="off" required>
