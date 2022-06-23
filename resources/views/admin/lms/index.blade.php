@@ -36,7 +36,7 @@
                                 <tr>
                                         <td class="text-center">{{ $loop->iteration}}</td>
                                         <td class="text-center">
-                                            <form id="data-{{ $item->id }}" action="{{url($main['link'].'/'.$item->id)}}" method="post">
+                                            <form id="data-{{ $item->id }}" action="{{url('datalms/'.$item->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 </form>
@@ -46,7 +46,7 @@
                                                       <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a href="{{ url('lms/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file text-primary"style="width: 25px"></i> DETAIL</a>
+                                                        <a href="{{ url('datalms/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file text-primary"style="width: 25px"></i> DETAIL</a>
                                                         <button type="button" data-toggle="modal" data-mapel_id="{{ $item->mapel_id }}" data-fase="{{ $item->fase }}" data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                         </button>
                                                       <div class="dropdown-divider"></div>
@@ -73,7 +73,7 @@
         <div class="modal fade" id="tambah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ url($main['link'])}}" method="post">
+                <form action="{{ url('datalms')}}" method="post">
                     @csrf
                 <div class="modal-header">
                     <h4 class="modal-title">Tambah Data LMS</h4>
@@ -119,7 +119,7 @@
         <div class="modal fade" id="ubah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ route($main['link'].'.update','test')}}" method="post">
+                <form action="{{ route('datalms.update','test')}}" method="post">
                     @csrf
                     @method('patch')
                 <div class="modal-header">
